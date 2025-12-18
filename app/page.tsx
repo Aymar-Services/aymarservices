@@ -54,7 +54,7 @@ export default function Home() {
       />
 
       <header
-        className="fixed top-4 z-[9999] mx-auto hidden w-full max-w-5xl flex-row items-center justify-between self-start rounded-full bg-background/80 md:flex backdrop-blur-sm border border-border/50 shadow-lg transition-all duration-300 px-4 py-2"
+        className="fixed top-0 left-0 right-0 z-[9999] hidden md:flex flex-row items-center justify-between bg-background/90 backdrop-blur-md border-b border-border/30 shadow-lg transition-all duration-300 px-6 lg:px-12 py-4"
         style={{
           willChange: "transform",
           transform: "translateZ(0)",
@@ -62,128 +62,130 @@ export default function Home() {
           perspective: "1000px",
         }}
       >
-        <a
-          className="z-50 flex items-center justify-center gap-3 cursor-pointer group"
-          href="#hero"
-          onClick={(e) => {
-            e.preventDefault()
-            window.scrollTo({ top: 0, behavior: "smooth" })
-          }}
-        >
-          <div className="relative group-hover:scale-105 transition-transform duration-300">
-            <div className="bg-primary/20 border-2 border-primary/50 rounded-lg p-2 group-hover:shadow-lg group-hover:shadow-primary/30 transition-all duration-300">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 64 64"
-                className="h-6 w-6 text-primary"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                {/* Custom Aymar Logo - Mountain peak with tech elements */}
-                <path d="M32 8 L48 40 H16 Z" fill="currentColor" opacity="0.8" />
-                <path d="M32 8 L40 28 L24 28 Z" fill="currentColor" opacity="0.5" />
-                <circle cx="32" cy="20" r="3" fill="white" opacity="0.9" />
-                <path d="M28 32 L32 28 L36 32" strokeWidth="2.5" />
-                <path d="M20 48 H44" strokeWidth="2" />
-                <circle cx="26" cy="35" r="1.5" fill="currentColor" />
-                <circle cx="38" cy="35" r="1.5" fill="currentColor" />
-                <path d="M29 42 L32 38 L35 42" strokeWidth="1.5" opacity="0.7" />
-              </svg>
+        <div className="flex items-center justify-between w-full max-w-[1920px] mx-auto">
+          <a
+            className="z-50 flex items-center justify-center gap-3 cursor-pointer group"
+            href="#hero"
+            onClick={(e) => {
+              e.preventDefault()
+              window.scrollTo({ top: 0, behavior: "smooth" })
+            }}
+          >
+            <div className="relative group-hover:scale-105 transition-transform duration-300">
+              <div className="bg-primary/20 border-2 border-primary/50 rounded-lg p-2 group-hover:shadow-lg group-hover:shadow-primary/30 transition-all duration-300">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 64 64"
+                  className="h-6 w-6 text-primary"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  {/* Custom Aymar Logo - Mountain peak with tech elements */}
+                  <path d="M32 8 L48 40 H16 Z" fill="currentColor" opacity="0.8" />
+                  <path d="M32 8 L40 28 L24 28 Z" fill="currentColor" opacity="0.5" />
+                  <circle cx="32" cy="20" r="3" fill="white" opacity="0.9" />
+                  <path d="M28 32 L32 28 L36 32" strokeWidth="2.5" />
+                  <path d="M20 48 H44" strokeWidth="2" />
+                  <circle cx="26" cy="35" r="1.5" fill="currentColor" />
+                  <circle cx="38" cy="35" r="1.5" fill="currentColor" />
+                  <path d="M29 42 L32 38 L35 42" strokeWidth="1.5" opacity="0.7" />
+                </svg>
+              </div>
             </div>
+            <div className="flex flex-col">
+              <span className="text-lg font-bold text-primary">Aymar Services</span>
+              <span className="text-[10px] text-white font-medium tracking-wide">Beat the Best</span>
+            </div>
+          </a>
+
+          <div className="flex flex-1 flex-row items-center justify-center space-x-2 text-sm font-medium">
+            <a
+              className="relative px-4 py-2 text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+              onClick={(e) => {
+                e.preventDefault()
+                const element = document.getElementById("services")
+                if (element) {
+                  const headerOffset = 120
+                  const elementPosition = element.getBoundingClientRect().top + window.pageYOffset
+                  const offsetPosition = elementPosition - headerOffset
+
+                  window.scrollTo({
+                    top: offsetPosition,
+                    behavior: "smooth",
+                  })
+                }
+              }}
+            >
+              <span className="relative z-20">Services</span>
+            </a>
+            <a
+              className="relative px-4 py-2 text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+              onClick={(e) => {
+                e.preventDefault()
+                const element = document.getElementById("testimonials")
+                if (element) {
+                  const headerOffset = 120
+                  const elementPosition = element.getBoundingClientRect().top + window.pageYOffset
+                  const offsetPosition = elementPosition - headerOffset
+
+                  window.scrollTo({
+                    top: offsetPosition,
+                    behavior: "smooth",
+                  })
+                }
+              }}
+            >
+              <span className="relative z-20">Clients</span>
+            </a>
+            <a
+              className="relative px-4 py-2 text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+              onClick={(e) => {
+                e.preventDefault()
+                const element = document.getElementById("faq")
+                if (element) {
+                  const headerOffset = 120
+                  const elementPosition = element.getBoundingClientRect().top + window.pageYOffset
+                  const offsetPosition = elementPosition - headerOffset
+
+                  window.scrollTo({
+                    top: offsetPosition,
+                    behavior: "smooth",
+                  })
+                }
+              }}
+            >
+              <span className="relative z-20">FAQ</span>
+            </a>
           </div>
-          <div className="flex flex-col">
-            <span className="text-lg font-bold text-primary">Aymar Services</span>
-            <span className="text-[10px] text-white font-medium tracking-wide">Beat the Best</span>
+
+          <div className="flex items-center gap-4">
+            <a
+              onClick={(e) => {
+                e.preventDefault()
+                const element = document.getElementById("contact")
+                if (element) {
+                  const headerOffset = 120
+                  const elementPosition = element.getBoundingClientRect().top + window.pageYOffset
+                  const offsetPosition = elementPosition - headerOffset
+
+                  window.scrollTo({
+                    top: offsetPosition,
+                    behavior: "smooth",
+                  })
+                }
+              }}
+              className="rounded-md font-bold relative cursor-pointer hover:-translate-y-0.5 transition duration-200 inline-block text-center bg-gradient-to-b from-primary to-primary/80 text-primary-foreground shadow-[0px_2px_0px_0px_rgba(255,255,255,0.3)_inset] px-4 py-2 text-sm"
+            >
+              Get Started
+            </a>
           </div>
-        </a>
-
-        <div className="absolute inset-0 hidden flex-1 flex-row items-center justify-center space-x-2 text-sm font-medium text-muted-foreground transition duration-200 hover:text-foreground md:flex md:space-x-2">
-          <a
-            className="relative px-4 py-2 text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
-            onClick={(e) => {
-              e.preventDefault()
-              const element = document.getElementById("services")
-              if (element) {
-                const headerOffset = 120
-                const elementPosition = element.getBoundingClientRect().top + window.pageYOffset
-                const offsetPosition = elementPosition - headerOffset
-
-                window.scrollTo({
-                  top: offsetPosition,
-                  behavior: "smooth",
-                })
-              }
-            }}
-          >
-            <span className="relative z-20">Services</span>
-          </a>
-          <a
-            className="relative px-4 py-2 text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
-            onClick={(e) => {
-              e.preventDefault()
-              const element = document.getElementById("testimonials")
-              if (element) {
-                const headerOffset = 120
-                const elementPosition = element.getBoundingClientRect().top + window.pageYOffset
-                const offsetPosition = elementPosition - headerOffset
-
-                window.scrollTo({
-                  top: offsetPosition,
-                  behavior: "smooth",
-                })
-              }
-            }}
-          >
-            <span className="relative z-20">Clients</span>
-          </a>
-          <a
-            className="relative px-4 py-2 text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
-            onClick={(e) => {
-              e.preventDefault()
-              const element = document.getElementById("faq")
-              if (element) {
-                const headerOffset = 120
-                const elementPosition = element.getBoundingClientRect().top + window.pageYOffset
-                const offsetPosition = elementPosition - headerOffset
-
-                window.scrollTo({
-                  top: offsetPosition,
-                  behavior: "smooth",
-                })
-              }
-            }}
-          >
-            <span className="relative z-20">FAQ</span>
-          </a>
-        </div>
-
-        <div className="flex items-center gap-4">
-          <a
-            onClick={(e) => {
-              e.preventDefault()
-              const element = document.getElementById("contact")
-              if (element) {
-                const headerOffset = 120
-                const elementPosition = element.getBoundingClientRect().top + window.pageYOffset
-                const offsetPosition = elementPosition - headerOffset
-
-                window.scrollTo({
-                  top: offsetPosition,
-                  behavior: "smooth",
-                })
-              }
-            }}
-            className="rounded-md font-bold relative cursor-pointer hover:-translate-y-0.5 transition duration-200 inline-block text-center bg-gradient-to-b from-primary to-primary/80 text-primary-foreground shadow-[0px_2px_0px_0px_rgba(255,255,255,0.3)_inset] px-4 py-2 text-sm"
-          >
-            Get Started
-          </a>
         </div>
       </header>
 
-      <header className="fixed top-4 z-[9999] mx-4 flex w-auto flex-row items-center justify-between rounded-full bg-background/80 backdrop-blur-sm border border-border/50 shadow-lg md:hidden px-4 py-3">
+      <header className="fixed top-0 left-0 right-0 z-[9999] flex w-full flex-row items-center justify-between bg-background/90 backdrop-blur-md border-b border-border/30 shadow-lg md:hidden px-4 py-3">
         <a
           className="flex items-center justify-center gap-2 cursor-pointer group"
           href="#hero"
@@ -246,7 +248,7 @@ export default function Home() {
           onClick={() => setIsMobileMenuOpen(false)}
         >
           <div
-            className="absolute top-20 left-4 right-4 bg-background/95 backdrop-blur-md border border-border/50 rounded-2xl shadow-2xl p-6"
+            className="absolute top-16 left-4 right-4 bg-background/95 backdrop-blur-md border border-border/50 rounded-2xl shadow-2xl p-6"
             onClick={(e) => e.stopPropagation()}
           >
             <nav className="flex flex-col space-y-4">
@@ -282,25 +284,27 @@ export default function Home() {
       )}
 
       {/* Hero Section */}
-      <Hero />
+      <div className="pt-20">
+        <Hero />
+      </div>
 
       {/* Services Section */}
-      <div id="services">
+      <div id="services" className="relative z-30">
         <Features />
       </div>
 
       {/* Testimonials Section */}
-      <div id="testimonials">
+      <div id="testimonials" className="relative z-30">
         <TestimonialsSection />
       </div>
 
       {/* Contact Section */}
-      <div id="contact">
+      <div id="contact" className="relative z-30">
         <ContactSection />
       </div>
 
-      {/* FAQ Section */}
-      <div id="faq">
+      {/* FAQ Section - Added extra bottom padding and higher z-index to prevent hiding behind footer */}
+      <div id="faq" className="relative z-40 pb-32">
         <FAQSection />
       </div>
 

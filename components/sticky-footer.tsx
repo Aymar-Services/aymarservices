@@ -14,7 +14,7 @@ export function StickyFooter() {
           const scrollTop = window.scrollY
           const windowHeight = window.innerHeight
           const documentHeight = document.documentElement.scrollHeight
-          const isNearBottom = scrollTop + windowHeight >= documentHeight - 100
+          const isNearBottom = scrollTop + windowHeight >= documentHeight - 10
 
           setIsAtBottom(isNearBottom)
           ticking = false
@@ -32,7 +32,7 @@ export function StickyFooter() {
     <AnimatePresence>
       {isAtBottom && (
         <motion.div
-          className="fixed z-10 bottom-0 left-0 w-full h-24 flex justify-center items-center"
+          className="fixed z-[5] bottom-0 left-0 w-full h-24 flex justify-center items-center"
           style={{ backgroundColor: "#e78a53" }}
           initial={{ y: "100%" }}
           animate={{ y: 0 }}
