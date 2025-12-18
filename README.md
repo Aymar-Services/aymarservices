@@ -14,8 +14,6 @@ Any changes you make to your deployed app will be automatically pushed to this r
 
 Your project is live at:
 
-**[https://vercel.com/awaismehmooddev-5950s-projects/v0-saa-s-landing-page](https://vercel.com/awaismehmooddev-5950s-projects/v0-saa-s-landing-page)**
-
 ## Build your app
 
 Continue building your app on:
