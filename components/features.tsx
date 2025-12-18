@@ -2,7 +2,7 @@
 
 import { useTheme } from "next-themes"
 import { motion, useInView } from "framer-motion"
-import { useRef, useState } from "react"
+import { useRef } from "react"
 import { geist } from "@/lib/fonts"
 import { cn } from "@/lib/utils"
 import { Code, Smartphone, Brain, Sparkles, Zap, Shield } from "lucide-react"
@@ -11,12 +11,6 @@ export default function Features() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: false, amount: 0.3 })
   const { theme } = useTheme()
-  const [isAIHovering, setIsAIHovering] = useState(false)
-  const [pausedAnimations, setPausedAnimations] = useState<{ [key: number]: boolean }>({})
-
-  const togglePauseAnimation = (index: number, paused: boolean) => {
-    setPausedAnimations((prev) => ({ ...prev, [index]: paused }))
-  }
 
   const services = [
     {
@@ -83,8 +77,6 @@ export default function Features() {
 
         <motion.div
           className="group relative w-full max-w-6xl overflow-hidden rounded-2xl border-2 border-primary/40 bg-gradient-to-br from-primary/5 via-background to-background p-8 md:p-12 shadow-2xl"
-          onMouseEnter={() => setIsAIHovering(true)}
-          onMouseLeave={() => setIsAIHovering(false)}
           initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
           transition={{ duration: 0.5, delay: 0.2 }}
@@ -97,7 +89,7 @@ export default function Features() {
           <motion.div
             className="absolute inset-0 opacity-30"
             animate={
-              !isAIHovering && isInView
+              isInView
                 ? {
                     background: [
                       "radial-gradient(circle at 20% 50%, rgba(231, 138, 83, 0.3) 0%, transparent 50%)",
@@ -114,7 +106,7 @@ export default function Features() {
             <div className="flex items-start gap-6 mb-8">
               <motion.div
                 className="rounded-2xl bg-primary/20 p-4 border border-primary/30"
-                animate={!isAIHovering && isInView ? { rotate: [0, 5, -5, 0] } : {}}
+                animate={isInView ? { rotate: [0, 5, -5, 0] } : {}}
                 transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
               >
                 <Sparkles className="w-12 h-12 text-primary" />
@@ -131,16 +123,6 @@ export default function Features() {
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4 relative">
-              <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 hidden md:block">
-                <motion.div
-                  className="w-20 h-20 rounded-2xl bg-background border-2 border-primary/50 flex items-center justify-center shadow-xl"
-                  animate={!isAIHovering && isInView ? { scale: [1, 1.1, 1], rotate: [0, 180, 360] } : {}}
-                  transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY }}
-                >
-                  <Brain className="w-10 h-10 text-primary" />
-                </motion.div>
-              </div>
-
               {[
                 { icon: "💬", label: "Chatbots", color: "from-blue-500/20 to-blue-600/20" },
                 { icon: "🎯", label: "Predictions", color: "from-purple-500/20 to-purple-600/20" },
@@ -165,7 +147,7 @@ export default function Features() {
 
             <motion.div
               className="absolute -bottom-20 left-1/2 -translate-x-1/2 w-96 h-96 bg-primary/20 rounded-full blur-3xl"
-              animate={!isAIHovering && isInView ? { scale: [1, 1.2, 1], opacity: [0.2, 0.4, 0.2] } : {}}
+              animate={isInView ? { scale: [1, 1.2, 1], opacity: [0.2, 0.4, 0.2] } : {}}
               transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY }}
             />
           </div>
@@ -181,13 +163,11 @@ export default function Features() {
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
                 transition={{ duration: 0.5, delay: 0.6 + index * 0.2 }}
                 whileHover={{ y: -5 }}
-                onMouseEnter={() => togglePauseAnimation(index, true)}
-                onMouseLeave={() => togglePauseAnimation(index, false)}
               >
                 <motion.div
                   className="absolute inset-0 opacity-10"
                   animate={
-                    !pausedAnimations[index] && isInView
+                    isInView
                       ? {
                           backgroundImage: [
                             "radial-gradient(circle at 0% 0%, rgba(231, 138, 83, 0.3) 0%, transparent 50%)",
@@ -205,7 +185,7 @@ export default function Features() {
                   <motion.div
                     className="rounded-lg bg-primary/10 p-3 border border-primary/20"
                     animate={
-                      !pausedAnimations[index] && isInView
+                      isInView
                         ? {
                             boxShadow: [
                               "0 0 0px rgba(231, 138, 83, 0)",
