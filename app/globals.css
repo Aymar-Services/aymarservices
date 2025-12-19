@@ -228,3 +228,8 @@ body {
 .animate-shiny-text {
   animation: shiny-text 3s ease-in-out infinite;
 }
+
+/* Fix for Next.js portal element - hide when empty (zero dimensions are normal for empty portals) */
+nextjs-portal:empty {
+  display: none !important;
+}

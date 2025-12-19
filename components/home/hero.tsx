@@ -8,10 +8,11 @@ import { Zap, Menu, X } from "lucide-react"
 
 export default function Hero() {
   const [mounted, setMounted] = useState(false)
-  const ref = useRef(null)
+  const ref = useRef<HTMLElement>(null)
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
+    layoutEffect: false,
   })
   const isInView = useInView(ref, { once: false, amount: 0.3 })
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -29,8 +30,6 @@ export default function Hero() {
     setMounted(true)
   }, [])
 
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"])
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0])
 
   const techLogos = [
     {
@@ -117,10 +116,6 @@ export default function Hero() {
     },
   ]
 
-  if (!mounted) {
-    return null
-  }
-
   return (
     <>
       <section ref={ref} className="relative overflow-hidden min-h-screen flex flex-col pt-16 md:pt-20" id="hero">
@@ -203,17 +198,17 @@ export default function Hero() {
         />
 
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {[...Array(20)].map((_, i) => (
+          {mounted && [...Array(20)].map((_, i) => (
             <motion.div
               key={i}
               className="absolute w-1 h-1 bg-primary/30 rounded-full"
               initial={{
-                x: Math.random() * window.innerWidth,
-                y: Math.random() * window.innerHeight,
+                x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1920),
+                y: Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 1080),
               }}
               animate={{
-                y: [null, Math.random() * window.innerHeight],
-                x: [null, Math.random() * window.innerWidth],
+                y: [null, Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 1080)],
+                x: [null, Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1920)],
               }}
               transition={{
                 duration: Math.random() * 10 + 10,
@@ -225,7 +220,6 @@ export default function Hero() {
         </div>
 
         <motion.div
-          style={{ y, opacity }}
           className="container mx-auto px-4 py-24 sm:py-32 relative z-10 flex-1 flex flex-col"
         >
           <div className="mx-auto max-w-4xl text-center flex-1 flex flex-col justify-center">

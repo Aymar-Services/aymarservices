@@ -9,7 +9,7 @@ import { Code, Smartphone, Brain, Sparkles, Zap, Shield } from "lucide-react"
 
 export default function Features() {
   const ref = useRef(null)
-  const isInView = useInView(ref, { once: false, amount: 0.3 })
+  const isInView = useInView(ref, { once: true, amount: 0.1 })
   const { theme } = useTheme()
 
   const services = [
@@ -62,7 +62,7 @@ export default function Features() {
       <motion.div
         ref={ref}
         initial={{ opacity: 0, y: 50 }}
-        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0 }}
         className="container mx-auto flex flex-col items-center gap-6 sm:gap-12 px-4"
       >
@@ -76,9 +76,9 @@ export default function Features() {
         </h2>
 
         <motion.div
-          className="group relative w-full max-w-6xl overflow-hidden rounded-2xl border-2 border-primary/40 bg-gradient-to-br from-primary/5 via-background to-background p-8 md:p-12 shadow-2xl"
+          className="group relative w-full max-w-6xl overflow-hidden rounded-2xl border-2 border-primary/40 bg-gradient-to-br from-primary/5 via-background to-background p-6 sm:p-8 md:p-12 shadow-2xl"
           initial={{ opacity: 0, y: 50 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
           whileHover={{
             scale: 1.01,
@@ -103,26 +103,26 @@ export default function Features() {
           />
 
           <div className="relative z-10">
-            <div className="flex items-start gap-6 mb-8">
+            <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-6 mb-6 sm:mb-8 text-center sm:text-left">
               <motion.div
-                className="rounded-2xl bg-primary/20 p-4 border border-primary/30"
+                className="rounded-2xl bg-primary/20 p-3 sm:p-4 border border-primary/30 shrink-0"
                 animate={isInView ? { rotate: [0, 5, -5, 0] } : {}}
                 transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
               >
-                <Sparkles className="w-12 h-12 text-primary" />
+                <Sparkles className="w-8 h-8 sm:w-12 sm:h-12 text-primary" />
               </motion.div>
               <div className="flex-1">
-                <h3 className="text-3xl md:text-4xl font-bold mb-3 bg-gradient-to-r from-primary via-primary/80 to-primary bg-clip-text text-transparent">
+                <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2 sm:mb-3 bg-gradient-to-r from-primary via-primary/80 to-primary bg-clip-text text-transparent">
                   AI-Powered Solutions
                 </h3>
-                <p className="text-lg text-muted-foreground max-w-3xl">
+                <p className="text-sm sm:text-lg text-muted-foreground max-w-3xl">
                   Custom AI integrations, machine learning models, and intelligent automation to transform your business
                   processes and unlock new possibilities.
                 </p>
               </div>
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 relative">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 relative">
               {[
                 { icon: "💬", label: "Chatbots", color: "from-blue-500/20 to-blue-600/20" },
                 { icon: "🎯", label: "Predictions", color: "from-purple-500/20 to-purple-600/20" },
@@ -133,14 +133,14 @@ export default function Features() {
               ].map((item, index) => (
                 <motion.div
                   key={index}
-                  className={`relative rounded-xl bg-gradient-to-br ${item.color} backdrop-blur-sm border border-white/10 p-4 flex items-center gap-3`}
+                  className={`relative rounded-xl bg-gradient-to-br ${item.color} backdrop-blur-sm border border-white/10 p-3 sm:p-4 flex flex-col sm:flex-row items-center justify-center sm:justify-start gap-2 sm:gap-3 text-center sm:text-left`}
                   initial={{ opacity: 0, scale: 0.8 }}
-                  animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.3, delay: 0.4 + index * 0.1 }}
                   whileHover={{ scale: 1.05, y: -5 }}
                 >
-                  <span className="text-2xl">{item.icon}</span>
-                  <span className="text-sm font-semibold text-foreground">{item.label}</span>
+                  <span className="text-xl sm:text-2xl">{item.icon}</span>
+                  <span className="text-xs sm:text-sm font-semibold text-foreground">{item.label}</span>
                 </motion.div>
               ))}
             </div>
@@ -160,7 +160,7 @@ export default function Features() {
                 key={index}
                 className="group relative overflow-hidden rounded-xl border-2 border-secondary/40 bg-card p-6 shadow-lg transition-all hover:border-primary/60 hover:shadow-xl"
                 initial={{ opacity: 0, y: 50 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.6 + index * 0.2 }}
                 whileHover={{ y: -5 }}
               >
@@ -212,7 +212,7 @@ export default function Features() {
                       key={detailIndex}
                       className="flex items-start gap-2 text-sm text-muted-foreground"
                       initial={{ opacity: 0, x: -10 }}
-                      animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.3, delay: 0.8 + index * 0.2 + detailIndex * 0.05 }}
                     >
                       <Zap className="w-4 h-4 text-primary shrink-0 mt-0.5" />
@@ -230,7 +230,7 @@ export default function Features() {
         <motion.div
           className="w-full max-w-6xl mt-12 flex flex-wrap items-center justify-center gap-8 text-muted-foreground"
           initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+          animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 1.2 }}
         >
           {[

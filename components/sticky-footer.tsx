@@ -40,11 +40,11 @@ export function StickyFooter() {
           transition={{ duration: 0.3, ease: "easeOut" }}
         >
           <div
-            className="relative overflow-hidden w-full h-full flex justify-between items-center px-6 sm:px-12"
+            className="relative overflow-hidden w-full h-full flex flex-col md:flex-row justify-center md:justify-between items-center px-6 sm:px-12 gap-1 md:gap-0"
             style={{ color: "#121113" }}
           >
             <motion.h2
-              className="text-4xl sm:text-5xl md:text-6xl font-bold select-none"
+              className="text-3xl sm:text-5xl md:text-6xl font-bold select-none"
               style={{ color: "#121113" }}
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
@@ -54,7 +54,7 @@ export function StickyFooter() {
             </motion.h2>
 
             <motion.p
-              className="text-sm sm:text-base font-medium"
+              className="text-[10px] sm:text-base font-medium text-center md:text-right"
               style={{ color: "#121113" }}
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}

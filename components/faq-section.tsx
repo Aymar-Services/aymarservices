@@ -1,18 +1,18 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useCallback } from "react"
 import { Plus, Minus } from "lucide-react"
 import { motion, AnimatePresence, useInView } from "framer-motion"
 import { useRef } from "react"
 
 export function FAQSection() {
-  const [openItems, setOpenItems] = useState<number[]>([])
+  const [openIndex, setOpenIndex] = useState<number | null>(null)
   const [pausedCards, setPausedCards] = useState<{ [key: number]: boolean }>({})
   const ref = useRef(null)
-  const isInView = useInView(ref, { once: false, amount: 0.2 })
+  const isInView = useInView(ref, { once: true, amount: 0.1 })
 
   const toggleItem = (index: number) => {
-    setOpenItems((prev) => (prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index]))
+    setOpenIndex((prev) => prev === index ? null : index)
   }
 
   const faqs = [
@@ -45,7 +45,7 @@ export function FAQSection() {
   ]
 
   return (
-    <section ref={ref} className="relative z-20 overflow-hidden pb-32 pt-16 md:pb-40 md:pt-20">
+    <section ref={ref} className="relative z-20 overflow-hidden pb-16 pt-12 md:pb-32 md:pt-16 lg:pb-40 lg:pt-20">
       <div className="bg-primary/20 absolute top-1/2 -right-20 z-0 h-64 w-64 rounded-full opacity-80 blur-3xl"></div>
       <div className="bg-primary/20 absolute top-1/2 -left-20 z-0 h-64 w-64 rounded-full opacity-80 blur-3xl"></div>
 
@@ -64,7 +64,7 @@ export function FAQSection() {
         </motion.div>
 
         <motion.h2
-          className="mx-auto mt-6 mb-12 max-w-xl text-center text-3xl font-medium md:text-4xl lg:text-5xl"
+          className="mx-auto mt-4 mb-8 max-w-xl text-center text-2xl font-medium md:text-3xl md:mt-6 md:mb-12 lg:text-4xl xl:text-5xl"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
@@ -76,13 +76,13 @@ export function FAQSection() {
           </span>
         </motion.h2>
 
-        <div className="mx-auto max-w-6xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="mx-auto max-w-6xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4 items-start">
           {faqs.map((faq, index) => (
             <motion.div
-              key={index}
-              className="from-secondary/40 to-secondary/10 rounded-2xl border border-white/10 bg-gradient-to-b p-5 shadow-[0px_2px_0px_0px_rgba(255,255,255,0.1)_inset] transition-all duration-300 hover:border-white/20 cursor-pointer relative overflow-hidden"
+              key={`faq-${index}`}
+              className="from-secondary/40 to-secondary/10 rounded-xl md:rounded-2xl border border-white/10 bg-gradient-to-b p-3 md:p-4 lg:p-5 shadow-[0px_2px_0px_0px_rgba(255,255,255,0.1)_inset] transition-all duration-300 hover:border-white/20 cursor-pointer relative overflow-hidden flex flex-col"
               initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.05 }}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
@@ -135,32 +135,29 @@ export function FAQSection() {
                 }}
               />
 
-              <div className="flex items-start justify-between gap-3 relative z-10">
-                <h3 className="m-0 font-medium text-sm leading-snug">{faq.question}</h3>
+              <div className="flex items-start justify-between gap-2 md:gap-3 relative z-10">
+                <h3 className="m-0 font-medium text-xs md:text-sm leading-snug">{faq.question}</h3>
                 <motion.div
-                  animate={{ rotate: openItems.includes(index) ? 180 : 0 }}
+                  animate={{ rotate: openIndex === index ? 180 : 0 }}
                   transition={{ duration: 0.3, ease: "easeInOut" }}
                   className="flex-shrink-0"
                 >
-                  {openItems.includes(index) ? (
-                    <Minus className="text-primary transition duration-300" size={18} />
+                  {openIndex === index ? (
+                    <Minus className="text-primary transition duration-300" size={16} />
                   ) : (
-                    <Plus className="text-primary transition duration-300" size={18} />
+                    <Plus className="text-primary transition duration-300" size={16} />
                   )}
                 </motion.div>
               </div>
               <AnimatePresence>
-                {openItems.includes(index) && (
+                {openIndex === index && (
                   <motion.div
-                    className="text-muted-foreground text-xs leading-relaxed overflow-hidden relative z-10"
-                    initial={{ opacity: 0, height: 0, marginTop: 0 }}
-                    animate={{ opacity: 1, height: "auto", marginTop: 12 }}
-                    exit={{ opacity: 0, height: 0, marginTop: 0 }}
-                    transition={{
-                      duration: 0.3,
-                      ease: "easeInOut",
-                      opacity: { duration: 0.15 },
-                    }}
+                    key={index}
+                    className="text-muted-foreground text-[11px] md:text-xs leading-relaxed relative z-10 mt-2 md:mt-3"
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.3 }}
                   >
                     {faq.answer}
                   </motion.div>
