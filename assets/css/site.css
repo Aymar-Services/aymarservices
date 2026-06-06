@@ -783,9 +783,18 @@ h5,
   padding: 64px 0 42px;
 }
 
-.footer-brand img {
+.footer-brand .brand-logo {
   width: 154px;
   margin-bottom: 18px;
+}
+
+.footer-brand .brand-logo img {
+  width: calc(154px * 140 / 470);
+}
+
+.footer-brand .brand-logo-label {
+  margin-left: calc(154px * 10 / 470);
+  font-size: calc(154px * 86 / 470);
 }
 
 .footer-title {
