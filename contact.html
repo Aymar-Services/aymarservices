@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Contact Aymar for software development, automation, AI chatbots, integrations, ERP optimization, mobile apps, migrations, SEO, and project estimates.">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; script-src 'self'; style-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self' mailto:; upgrade-insecure-requests">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; script-src 'self'; style-src 'self'; connect-src 'self' https://formsubmit.co; base-uri 'self'; object-src 'none'; form-action 'self'; upgrade-insecure-requests">
     <title>Contact | Aymar</title>
     <link rel="stylesheet" href="assets/css/site.css">
     <script src="assets/js/site.js" defer></script>
@@ -34,10 +34,11 @@
               <li>Required reports, dashboards, and user roles</li>
               <li>Deadline, urgency, and preferred delivery model</li>
             </ul>
-            <div class="note">This static form uses your email app instead of a server database. That keeps the public site lighter and reduces the attack surface.</div>
+            <div class="note">Submit the form below and your request is sent directly to our team. You will see a confirmation message on this page.</div>
           </div>
           <div class="contact-panel">
-            <form class="form" action="mailto:solutions@aymarservices.com" method="post" enctype="text/plain">
+            <form class="form" data-contact-form method="post" novalidate>
+              <p class="form-status" data-form-status hidden role="status"></p>
               <div class="field"><label for="name">Name</label><input id="name" name="name" autocomplete="name" required></div>
               <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required></div>
               <div class="field">

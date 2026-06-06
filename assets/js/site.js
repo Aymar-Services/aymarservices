@@ -21,6 +21,78 @@
     node.textContent = new Date().getFullYear();
   });
 
+  const contactForm = document.querySelector("[data-contact-form]");
+  if (contactForm) {
+    const status = contactForm.querySelector("[data-form-status]");
+    const submitButton = contactForm.querySelector('button[type="submit"]');
+    const defaultButtonText = submitButton ? submitButton.textContent : "Send request";
+
+    contactForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      if (!contactForm.checkValidity()) {
+        contactForm.reportValidity();
+        return;
+      }
+
+      if (submitButton) {
+        submitButton.disabled = true;
+        submitButton.textContent = "Sending...";
+      }
+
+      if (status) {
+        status.hidden = true;
+        status.className = "form-status";
+      }
+
+      const formData = new FormData(contactForm);
+      const payload = {
+        name: formData.get("name"),
+        email: formData.get("email"),
+        service: formData.get("service"),
+        budget: formData.get("budget"),
+        message: formData.get("message"),
+        _subject: "New contact request from Aymar website",
+        _captcha: "false",
+      };
+
+      try {
+        const response = await fetch("https://formsubmit.co/ajax/maryam98.riaz@gmail.com", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify(payload),
+        });
+
+        if (!response.ok) {
+          throw new Error("Form submission failed");
+        }
+
+        contactForm.reset();
+
+        if (status) {
+          status.textContent = "Thank you. Your request was sent successfully.";
+          status.className = "form-status form-status--success";
+          status.hidden = false;
+        }
+      } catch {
+        if (status) {
+          status.textContent =
+            "Sorry, something went wrong. Please email maryam98.riaz@gmail.com directly.";
+          status.className = "form-status form-status--error";
+          status.hidden = false;
+        }
+      } finally {
+        if (submitButton) {
+          submitButton.disabled = false;
+          submitButton.textContent = defaultButtonText;
+        }
+      }
+    });
+  }
+
   const protectedRoot = document.querySelector("[data-copy-protect='true']");
   if (protectedRoot) {
     const allowEditable = (target) =>
