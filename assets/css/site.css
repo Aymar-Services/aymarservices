@@ -200,9 +200,29 @@ h5,
   flex: 0 0 auto;
 }
 
-.brand img {
+.brand-logo {
+  display: inline-flex;
+  align-items: center;
   width: 150px;
+  line-height: 0;
+}
+
+.brand-logo img {
+  width: calc(150px * 140 / 470);
   height: auto;
+  flex-shrink: 0;
+  display: block;
+}
+
+.brand-logo-label {
+  margin-left: calc(150px * 10 / 470);
+  color: var(--color-white);
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: calc(150px * 86 / 470);
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  line-height: 1;
+  white-space: nowrap;
 }
 
 .nav-menu {
